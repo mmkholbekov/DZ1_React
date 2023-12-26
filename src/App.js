@@ -1,35 +1,127 @@
-
 import React, { useState } from "react";
+import "./css/todo.css"
 
-const TodoApp = () => {
-    const [tasks, setTasks] = useState([])
-    const [newTask, setNewTask] = useState('')
+const TodoList = () => {
+  const [tasks, setTasks] = useState([])
+  const [newTask, setNewTask] = useState("")
+  const [editingTask, setEditingTask] = useState(null)
 
-    const handleInputChange = (event) => {
-        setNewTask(event.target.value)
+  const addTask = () => {
+    if (newTask.trim() !== "") {
+      if (editingTask !== null) {
+        // Редактирование задачи
+        updateTask(editingTask, newTask)
+      } else {
+        // Добавление новой задвчи
+        createTask(newTask);
+      }
+      setNewTask("")
+      setEditingTask(null)
     }
-    const handleAddTask = () => {
-        if (newTask.trim() !== '') {
-            setTasks([...tasks, newTask])
-            setNewTask('');
-        }
+  }
+
+  const createTask = (text) => {
+    const newTaskObject = {
+      id: Date.now(),
+      text: text,
     }
-    return (
-        <div>
-            <h2>TodoApp</h2>
-            <ul>
-                {tasks.map((task, index) => (
-                    <li key={index}>{task}</li>
-                ))}
-            </ul>
-            <div>
-                <input type="text" value={newTask} onChange={handleInputChange}/>
-                <button onClick={handleAddTask}>Добавить задачу</button>
-            </div>
-        </div>
+    setTasks([...tasks, newTaskObject])
+  }
+  const updateTask = (taskId, newText) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, text: newText } : task
     )
+    setTasks(updatedTasks)
+  }
+  const deleteTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId)
+    setTasks(updatedTasks)
+  }
+  const editTask = (taskId) => {
+    const taskToEdit = tasks.find((task) => task.id === taskId)
+    if (taskToEdit) {
+      setNewTask(taskToEdit.text)
+      setEditingTask(taskId)
+    }
+  };
+
+  return (
+    <div>
+      <h1>Todos List</h1>
+      <div>
+        <input
+          type="text"
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button onClick={addTask}>
+          {editingTask !== null ? "Редактировать" : "Добавить задачу"}
+        </button>
+      </div>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            {task.text}
+            <button onClick={() => editTask(task.id)}>Редактировать</button>
+            <button onClick={() => deleteTask(task.id)}>Удалить</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
-export default TodoApp
+
+export default TodoList;
+
+
+
+//     LESSON 5
+
+// import React from 'react';
+// import { useState } from "react";
+// export default function Form() {
+//     const [form, setForm] = useState({
+//         firstName: 'Barbara',
+//         lastName: 'Johnson',
+//         phoneNumber: +996100200300
+//     })
+//     return(
+//         <>
+//             <label>
+//                 First name:
+//                 <input value={form.firstName} onChange={e => {
+//                     setForm({
+//                         ...form,
+//                         firstName: e.target.value
+//                     })
+//                 }}/>
+//             </label>
+//             <label>
+//                 Last name:
+//                 <input value={form.lastName} onChange={e => {
+//                     setForm({
+//                         ...form,
+//                         lastName: e.target.value
+//                     })
+//                 }}/>
+//             </label>
+//             <label>
+//                 Phone number:
+//                 <input value={form.phoneNumber} onChange={e => {
+//                     setForm({
+//                         ...form,
+//                         phoneNumber: e.target.value
+//                     })
+//                 }}/>
+//             </label>
+//             <p>
+//                 {form.firstName}{''}
+//                 {form.lastName}{''}
+//                 {form.phoneNumber}{''}
+//             </p>
+//         </>
+//     )
+// }
 
 
 // import React from 'react';
@@ -73,6 +165,9 @@ export default TodoApp
 //     )
 // }
 
+
+
+//     HOME WORK 2
 
 // const TwoSquares = () => {
 //   const [Color1, setColor1] = useState('red')
