@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './css/index.css';
-import MemoCallback from "./App";
+// import MemoCallback from "./App";
 // import RegistrationForm from "./form";
 // import TaskApp from "./components/Massiv";
 // import ProductPage from "./App";
@@ -9,6 +9,7 @@ import MemoCallback from "./App";
 // import TimerExample from "./App";
 // import ProductPage from "./components/ProductPage";
 // import ExampleWithMemoCallback from "./App";
+import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
       {/*<ExampleWithMemoCallback/>*/}
       {/*<TimerExample/>*/}
       {/*<ProductPage/>*/}
-    <MemoCallback/>
+      {/*<MemoCallback/>*/}
+      <App/>
   </React.StrictMode>
 );

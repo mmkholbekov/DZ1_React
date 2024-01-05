@@ -1,76 +1,51 @@
-/* ProductPage.css */
+body, h1, h2, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: #f8f8f8;
+  color: #333;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  background-image: url("https://nyweekly.com/wp-content/uploads/2023/06/Ahmad-Nabil-CEO-of-VIP-Motors-Arranges-a-Bugatti-Divo-Drop4-jpg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 853px;
 }
 
-.container {
-  text-align: center;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  color: #333;
-  justify-content: space-between;
-}
-
-input {
+nav {
+  background-color: #333;
   padding: 10px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  margin-right: 10px;
 }
 
 ul {
   list-style: none;
-  padding: 0;
+  display: flex;
 }
 
 li {
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li button {
-  margin-left: 10px;
-  padding: 8px;
-  font-size: 14px;
-  background-color: #e74c3c;
+  margin-right: 20px;
   color: white;
-  border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-li button.edit {
-  background-color: #3498db;
+section {
+  padding: 20px;
 }
 
+h2 {
+  color: #333;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

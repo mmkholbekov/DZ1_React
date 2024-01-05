@@ -1,54 +1,99 @@
-//      HOME WORK 7
-import React, {useState, useMemo, useCallback} from "react";
+//         HOME WORK 8
+import React from "react";
+import NavBar from "./components/NavBar";
+import Section from "./components/Section";
+import Footer from "./components/Footer";
 import './css/todo.css'
 
-const TaskList = ({ tasks }) => {
-  console.log("TaskList рендерится");
-  return (
-    <ul>
-      {tasks.map((task) => (
-        <li key={task.id}>{task.title}</li>
-      ))}
-    </ul>
-  );
-};
-
-const MemoCallback = () => {
-  const [filter, setFilter] = useState("");
-  const [allTasks, setAllTasks] = useState([
-    { id: 1, title: "Задача 1" },
-    { id: 2, title: "Задача 2" },
-    { id: 3, title: "Задача 3" },
-  ]);
-
-  const filteredTasks = useMemo(() => {
-    console.log("useMemo рендерится");
-    return allTasks.filter((task) =>
-      task.title.toLowerCase().includes(filter.toLowerCase())
-    );
-  }, [allTasks, filter]);
-
-  const handleFilterChange = useCallback(
-    (event) => {
-      setFilter(event.target.value);
-    },
-    []
-  );
-
+const App = () => {
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Фильтр задач"
-        value={filter}
-        onChange={handleFilterChange}
-      />
-      <TaskList tasks={filteredTasks} />
+      <NavBar />
+      <Section />
+      <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default MemoCallback;
+export default App;
+
+
+
+// //      LESSON 8
+// import React, {useState} from "react";
+//
+// export default function App() {
+//   const [position, setPosition] = useState({x: 0, y: 0});
+//   return (
+//       <div onPointerMove={(e) => {setPosition({x: e.clientX, y: e.clientY})}}
+//         style={{position: "relative", width: "100vw", height: "100vh"}}>
+//         <div style={{
+//           position: 'absolute',
+//           backgroundColor: 'red',
+//           borderRadius: '50%',
+//           transform: `translate(${position.x}px, ${position.y}px)`,
+//           left: -10,
+//           top: -10,
+//           width: 20,
+//           height: 20,
+//         }}>
+//
+//         </div>
+//       </div>
+//   )
+// }
+
+
+//      HOME WORK 7
+// import React, {useState, useMemo, useCallback} from "react";
+//
+// const TaskList = ({ tasks }) => {
+//   console.log("TaskList рендерится");
+//   return (
+//     <ul>
+//       {tasks.map((task) => (
+//         <li key={task.id}>{task.title}</li>
+//       ))}
+//     </ul>
+//   )
+// }
+//
+// const MemoCallback = () => {
+//   const [filter, setFilter] = useState("");
+//   const [allTasks, setAllTasks] = useState([
+//     { id: 1, title: "Задача 1" },
+//     { id: 2, title: "Задача 2" },
+//     { id: 3, title: "Задача 3" },
+//   ])
+//
+//   const filteredTasks = useMemo(() => {
+//     console.log("useMemo рендерится");
+//     return allTasks.filter((task) =>
+//       task.title.toLowerCase().includes(filter.toLowerCase())
+//     );
+//   }, [allTasks, filter])
+//
+//   const handleFilterChange = useCallback(
+//     (event) => {
+//       setFilter(event.target.value);
+//     },
+//     []
+//   )
+//
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         placeholder="Фильтр задач"
+//         value={filter}
+//         onChange={handleFilterChange}
+//       />
+//       <TaskList tasks={filteredTasks} />
+//     </div>
+//   );
+// };
+//
+// export default MemoCallback;
 
 
 //        LESSON 7/2
