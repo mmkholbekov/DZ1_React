@@ -1,60 +1,153 @@
-//      Home Work 6
+//      HOME WORK 7
+import React, {useState, useMemo, useCallback} from "react";
+import './css/todo.css'
 
-import React, { useState, useEffect, useRef } from "react";
-import "./css/todo.css"
+const TaskList = ({ tasks }) => {
+  console.log("TaskList рендерится");
+  return (
+    <ul>
+      {tasks.map((task) => (
+        <li key={task.id}>{task.title}</li>
+      ))}
+    </ul>
+  );
+};
 
-const TimerExample = () => {
-  const [seconds, setSeconds] = useState(0)
-  const [isActive, setIsActive] = useState(false)
-  const timerRef = useRef(null)
+const MemoCallback = () => {
+  const [filter, setFilter] = useState("");
+  const [allTasks, setAllTasks] = useState([
+    { id: 1, title: "Задача 1" },
+    { id: 2, title: "Задача 2" },
+    { id: 3, title: "Задача 3" },
+  ]);
 
-  useEffect(() => {
-    const handleInterval = () => {
-      setSeconds((prevSeconds) => prevSeconds + 1)
-    }
+  const filteredTasks = useMemo(() => {
+    console.log("useMemo рендерится");
+    return allTasks.filter((task) =>
+      task.title.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [allTasks, filter]);
 
-    if (isActive) {
-      timerRef.current = setInterval(handleInterval, 1000)
-    }
-
-    return () => {
-      if (isActive) {
-        clearInterval(timerRef.current);
-      }
-    }
-  }, [isActive]);
-
-  const handleStart = () => {
-    setIsActive(true)
-  };
-
-  const handleStop = () => {
-    setIsActive(false);
-  };
-
-  const handleReset = () => {
-    setIsActive(false)
-    setSeconds(0)
-  };
+  const handleFilterChange = useCallback(
+    (event) => {
+      setFilter(event.target.value);
+    },
+    []
+  );
 
   return (
     <div>
-      <h1>Timer: {seconds}s</h1>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handleStop}>Stop</button>
-      <button onClick={handleReset}>Reset</button>
+      <input
+        type="text"
+        placeholder="Фильтр задач"
+        value={filter}
+        onChange={handleFilterChange}
+      />
+      <TaskList tasks={filteredTasks} />
     </div>
   );
-}
+};
 
-export default TimerExample;
+export default MemoCallback;
 
 
+//        LESSON 7/2
+// import { useState } from 'react';
+// import ProductPage from './components/ProductPage.js';
+//
+// export default function App() {
+//   const [isDark, setIsDark] = useState(false);
+//   return (
+//     <>
+//       <label>
+//         <input
+//           type="checkbox"
+//           checked={isDark}
+//           onChange={e => setIsDark(e.target.checked)}
+//         />
+//         Dark mode
+//       </label>
+//       <hr />
+//       <ProductPage
+//         referrerId="wizard_of_oz"
+//         productId={123}
+//         theme={isDark ? 'dark' : 'light'}
+//       />
+//     </>
+//   );
+// }
+// import React, {useState} from "react";
+
+//         LESSON 7/1
+// import {createTodos} from "./components/ShippingForm";
+// import ProductPage from "./components/ProductPage";
+//
+// const todos = createTodos()
+//
+// export default function App() {
+//   const [tab, setTab] = useState('all')
+//
+//   return (
+//       <>
+//         <button onClick={() => setTab('all')}>All</button>
+//         <button onClick={() => setTab('active')}>Active</button>
+//         <button onClick={() => setTab('complete')}>Complete</button>
+//         <br/>
+//         <hr/>
+//           <ProductPage todos={todos} tab={tab} />
+//       </>
+//   )
+// }
+
+//        HOME WORK 6
+// const TimerExample = () => {
+//   const [seconds, setSeconds] = useState(0)
+//   const [isActive, setIsActive] = useState(false)
+//   const timerRef = useRef(null)
+//
+//   useEffect(() => {
+//     const handleInterval = () => {
+//       setSeconds((prevSeconds) => prevSeconds + 1)
+//     }
+//
+//     if (isActive) {
+//       timerRef.current = setInterval(handleInterval, 1000)
+//     }
+//
+//     return () => {
+//       if (isActive) {
+//         clearInterval(timerRef.current);
+//       }
+//     }
+//   }, [isActive]);
+//
+//   const handleStart = () => {
+//     setIsActive(true)
+//   };
+//
+//   const handleStop = () => {
+//     setIsActive(false);
+//   };
+//
+//   const handleReset = () => {
+//     setIsActive(false)
+//     setSeconds(0)
+//   };
+//
+//   return (
+//     <div>
+//       <h1>Timer: {seconds}s</h1>
+//       <button onClick={handleStart}>Start</button>
+//       <button onClick={handleStop}>Stop</button>
+//       <button onClick={handleReset}>Reset</button>
+//     </div>
+//   );
+// }
+//
+// export default TimerExample;
 
 //      Home Work 5
-// import React, { useState } from "react";
-//
-// const TodoList = () => {
+// const ProductPage = () => {
 //   const [tasks, setTasks] = useState([])
 //   const [newTask, setNewTask] = useState("")
 //   const [editingTask, setEditingTask] = useState(null)
@@ -124,14 +217,9 @@ export default TimerExample;
 //   )
 // }
 //
-// export default TodoList;
-
-
+// export default ProductPage;
 
 //      LESSON 6
-// import React, {useRef} from "react";
-// import { useState } from "react";
-//
 // export default function Counter() {
 //   let ref = useRef(0)
 //   function handleClick() {
@@ -195,7 +283,6 @@ export default TimerExample;
 //   )
 // }
 
-
 //     LESSON 5
 // import React from 'react';
 // import { useState } from "react";
@@ -243,7 +330,6 @@ export default TimerExample;
 //     )
 // }
 
-
 // import React from 'react';
 // import { useState } from "react";
 // import { sculptureList } from "./data";
@@ -285,10 +371,7 @@ export default TimerExample;
 //     )
 // }
 
-
-
 //     HOME WORK 2
-
 // const TwoSquares = () => {
 //   const [Color1, setColor1] = useState('red')
 //   const [Color2, setColor2] = useState('blue')
@@ -318,7 +401,6 @@ export default TimerExample;
 // };
 //
 // export default TwoSquares
-
 
 // export default function Search() {
 //     function publish(formData) {
